@@ -29,13 +29,13 @@ with open(filey) as y:
         
 
     
-for i in range(200):
+for i in range(100):
     daily_exp_y.append((value_of_y[i+1]-value_of_y[i]/value_of_y[i]))
 
 
 with pm.Model() as model_y:
     mu = pm.Normal("mu", mu=0, sigma=1)
-    obs = pm.Normal("obs", mu=mu, sigma=1, observed=daily_exp_y(100))
+    obs = pm.Normal("obs", mu=mu, sigma=0.001, observed=daily_exp_y(100))
     
     sample_y = pm.sample(10000, tune=2500)
     
